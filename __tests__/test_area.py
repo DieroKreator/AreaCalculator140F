@@ -1,7 +1,7 @@
 import pytest
 
-from area.area import calcular_area_de_um_cubo
-# from utils.utils import ler_csv
+from area.area import calcular_area_de_um_cubo, calcular_area_de_uma_piramide
+from utils.utils import ler_csv
 
 
 # 2.2 - Criar 2 testes de unidade simples  (um positivo e um negativo) baseados em valores fixos para a função de cálculo da área do cubo
@@ -19,28 +19,13 @@ def test_negativo_calcular_area_de_um_cubo_():
 
     assert resultado_esperado == resultado_obtido
 
+# 2.3 - Criar um teste de unidade com um arquivo CSV de pelo menos 3 valores como massa de teste, 
+#       sendo pelo menos 1 teste positivo e 2 testes negativos, para a função de cálculo da área da pirâmide
+@pytest.mark.parametrize('base, altura, resultado_esperado',
+                            ler_csv('./fixtures/massa_area_piramide.csv')
+                        )
+def test_calcular_area_de_uma_piramide_csv(base, altura, resultado_esperado):
 
-# # 3 - Altere um desses testes de unidade para que leia uma massa de teste a partir de uma lista de valores
-# @pytest.mark.parametrize('num1, num2, resultado_esperado',
-#                          [ (5, 7, 35),
-#                            (1, 8, 8),
-#                            (10, 3, 30),
-#                            (4, 1.5, 6)
-#                          ]
-#                          )
-# def test_calcular_area_de_um_retangulo_lista(num1, num2, resultado_esperado):
+    resultado_obtido = calcular_area_de_uma_piramide(float(base), float(altura))
 
-#     resultado_obtido = calcular_area_de_um_retangulo(num1, num2)
-
-#     assert resultado_esperado == resultado_obtido
-
-
-# # 4 - Altere outro desses testes de unidade para que leia uma massa de teste a partir de um arquivo csv
-# @pytest.mark.parametrize('num1, num2, resultado_esperado',
-#                             ler_csv('./fixtures/massa_area_triangulo.csv')
-#                          )
-# def test_calcular_area_de_um_trinagulo_csv(num1, num2, resultado_esperado):
-
-#     resultado_obtido = calcular_area_de_um_triangulo(float(num1), float(num2))
-
-#     assert float(resultado_esperado) == resultado_obtido
+    assert float(resultado_esperado) == resultado_obtido
