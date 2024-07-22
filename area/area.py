@@ -1,6 +1,6 @@
 import math
 
-
+# 2.1 - Criar 3 funções para serem alvo dos testes de unidade.
 def calcular_area_de_um_cubo(num1):
     areaCubo = num1 ** 3
     return areaCubo
